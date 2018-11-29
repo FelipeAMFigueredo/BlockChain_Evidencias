@@ -1,0 +1,69 @@
+<html>
+<head>
+	<title>Grafos Testes</title>
+	<script src="https://frogcat.github.io/canvas-arrow/canvas-arrow.js"></script>
+	<script>
+		window.onload = function(){
+			var canvas = document.getElementById("canvas");		    
+			canvas.style = "border:1px solid black;";
+		    var ctx = canvas.getContext("2d");
+
+		    //      x    y   rad sAng eAng antiC  line    fill
+		    callDrawArc(70, 90, 38, 310, -50, "green");
+		    callDrawArc(237, 90, 38, 310, -50, "red");
+		    callDrawArc(404, 90, 38, 310, -50, "green");
+		    callDrawArc(237, 257, 38, 310, -50, "green");
+		    callDrawArc(110, 207, 38, 310, -50, "green");
+		    callDrawArc(362, 207, 38, 310, -50, "green");
+		    drawArrow();
+
+			function callDrawArc(xPos, yPos, radius, startAngle, endAngle, lineColor){
+				drawArc(xPos, yPos, radius, startAngle, endAngle,  true,  "gray", "white", 1);
+				drawArc(xPos, yPos, radius-8, startAngle-10, endAngle-30,  true,  lineColor, "white", 7);
+				drawArc(xPos+52, yPos+2, radius-25, startAngle, endAngle,  true,  "gray", "white", 1);
+				drawArc(xPos+52, yPos+2, radius-29, startAngle-10, endAngle-30,  true,  "black", "white", 4);
+			}
+
+			function drawArc(xPos, yPos, radius, startAngle, endAngle, anticlockwise, lineColor, fillColor, size){
+				var startAngle = startAngle * (Math.PI/180);
+				var endAngle   = endAngle   * (Math.PI/180);
+
+				var radius = radius;
+
+				ctx.strokeStyle = lineColor;
+				ctx.fillStyle   = fillColor;
+				ctx.lineWidth	= size;
+
+				ctx.beginPath();
+				ctx.arc(xPos, yPos, radius, startAngle, endAngle, anticlockwise);
+				ctx.fill();
+				ctx.stroke();
+			}
+
+			function hideCircle(){
+				ctx.style.display="block";
+			}
+
+			function drawArrow(){
+				var context = canvas.getContext("2d");
+				context.beginPath();
+				context.strokeStyle = "black";
+				context.fillStyle   = "black";
+				context.arrow(107, 93, 200, 93, [0, 1, -10, 1, -10, 5]);
+				context.arrow(367, 93, 274, 93, [0, 1, -10, 1, -10, 5]);
+				context.arrow(237, 220, 237, 127, [0, 1, -10, 1, -10, 5]);
+				context.arrow(142, 185, 237, 127, [0, 1, -10, 1, -10, 5]);
+				context.arrow(332, 185, 237, 127, [0, 1, -10, 1, -10, 5]);
+				context.fill();
+
+				context.style.visibility = "hidden";
+				//context.addEventListener("mouseover", hideCircle);
+			}
+		};
+
+	</script>
+</head>
+<body>
+		<canvas id="canvas" width="600" height="400"></canvas>
+</body>
+</html>
